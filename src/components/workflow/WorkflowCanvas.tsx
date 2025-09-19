@@ -108,7 +108,7 @@ export function WorkflowCanvas({ onNodeAdd }: WorkflowCanvasProps) {
   );
 
   return (
-    <div className="flex-1 h-full bg-canvas relative">
+    <div className="flex-1 h-full relative" style={{ backgroundColor: '#f9fafb' }}>
       {/* Top toolbar */}
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
         <input
@@ -146,7 +146,7 @@ export function WorkflowCanvas({ onNodeAdd }: WorkflowCanvasProps) {
           onDragOver={onDragOver}
           nodeTypes={nodeTypes}
           fitView
-          className="bg-canvas"
+          style={{ backgroundColor: '#f9fafb' }}
         >
           <Controls 
             className="bg-white border border-gray-200 rounded-lg shadow-sm"
