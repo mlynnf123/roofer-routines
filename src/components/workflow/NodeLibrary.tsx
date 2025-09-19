@@ -17,7 +17,7 @@ export function NodeLibrary({
   const filteredTemplates = NODE_TEMPLATES.filter(template => template.name.toLowerCase().includes(searchTerm.toLowerCase()) || template.description.toLowerCase().includes(searchTerm.toLowerCase()));
   const filteredCategories = categories.filter(category => filteredTemplates.some(template => template.category === category));
   return <Card className="w-80 shadow-lg border-border bg-card">
-      <CardHeader className="pb-3 bg-white/80 backdrop-blur-sm">
+      <CardHeader className="pb-3 bg-white/80 backdrop-blur-sm rounded">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-center px-[78px] text-base font-semibold">Build</h2>
           <Button variant="ghost" size="sm">
@@ -28,7 +28,7 @@ export function NodeLibrary({
         <div className="space-y-3">
           <div className="relative">
             <Icons.Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input placeholder="Search..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9 h-9 bg-slate-100 px-[17px]" />
+            <Input placeholder="Search..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9 h-9 bg-slate-100 px-[57px]" />
           </div>
           
           <Button variant="outline" size="sm" className="w-full justify-start text-slate-600 bg-slate-100">
