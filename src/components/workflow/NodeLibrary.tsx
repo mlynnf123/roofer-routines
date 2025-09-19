@@ -19,7 +19,7 @@ export function NodeLibrary({
   return <Card className="w-80 shadow-lg border-border bg-card">
       <CardHeader className="pb-3 bg-white/80 backdrop-blur-sm rounded">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-center px-[78px] text-base font-semibold">Build</h2>
+          <h2 className="text-center text-base font-semibold px-[17px]">Build</h2>
           <Button variant="ghost" size="sm">
             <Icons.X className="w-4 h-4" />
           </Button>
