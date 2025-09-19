@@ -26,7 +26,7 @@ export function CustomNode({ data, selected }: NodeProps) {
       <Handle
         type="target"
         position={Position.Top}
-        className="w-3 h-3 !bg-white/30 !border-2 !border-white/50"
+        className="w-3 h-3 !bg-blue-900 !border-2 !border-blue-800"
       />
       
       <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export function CustomNode({ data, selected }: NodeProps) {
       <Handle
         type="source"
         position={Position.Bottom}
-        className="w-3 h-3 !bg-white/30 !border-2 !border-white/50"
+        className="w-3 h-3 !bg-blue-900 !border-2 !border-blue-800"
       />
       
       {/* Context menu trigger - visible on hover */}
