@@ -38,8 +38,9 @@ export function NodeLibrary({ onNodeSelect }: NodeLibraryProps) {
                       )}
                       draggable
                       onDragStart={(e) => {
+                        e.dataTransfer.setData('application/reactflow', template.type);
                         e.dataTransfer.setData('application/json', JSON.stringify(template));
-                        e.dataTransfer.effectAllowed = 'copy';
+                        e.dataTransfer.effectAllowed = 'move';
                       }}
                       onClick={() => onNodeSelect(template)}
                     >

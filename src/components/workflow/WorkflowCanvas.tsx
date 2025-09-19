@@ -64,33 +64,45 @@ export function WorkflowCanvas({ onNodeAdd }: WorkflowCanvasProps) {
     (event: React.DragEvent) => {
       event.preventDefault();
 
-      const reactFlowBounds = reactFlowWrapper.current?.getBoundingClientRect();
-      if (!reactFlowBounds || !reactFlowInstance) return;
+      if (!reactFlowWrapper.current || !reactFlowInstance) {
+        console.log('Missing refs:', { reactFlowWrapper: !!reactFlowWrapper.current, reactFlowInstance: !!reactFlowInstance });
+        return;
+      }
 
+      const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       const templateData = event.dataTransfer.getData('application/json');
-      if (!templateData) return;
+      
+      if (!templateData) {
+        console.log('No template data found in drag event');
+        return;
+      }
 
-      const template: NodeTemplate = JSON.parse(templateData);
-      const position = reactFlowInstance.project({
-        x: event.clientX - reactFlowBounds.left,
-        y: event.clientY - reactFlowBounds.top,
-      });
+      try {
+        const template: NodeTemplate = JSON.parse(templateData);
+        const position = reactFlowInstance.screenToFlowPosition({
+          x: event.clientX - reactFlowBounds.left,
+          y: event.clientY - reactFlowBounds.top,
+        });
 
-      const newNode: Node = {
-        id: `${template.id}-${Date.now()}`,
-        type: 'custom',
-        position,
-        data: {
-          label: template.name,
-          configured: false,
-          color: template.color,
-          icon: template.icon,
-          type: template.type,
-        },
-      };
+        const newNode: Node = {
+          id: `${template.id}-${Date.now()}`,
+          type: 'custom',
+          position,
+          data: {
+            label: template.name,
+            configured: false,
+            color: template.color,
+            icon: template.icon,
+            type: template.type,
+          },
+        };
 
-      setNodes((nds) => [...nds, newNode]);
-      onNodeAdd?.(template, position);
+        console.log('Adding new node:', newNode);
+        setNodes((nds) => [...nds, newNode]);
+        onNodeAdd?.(template, position);
+      } catch (error) {
+        console.error('Error parsing template data:', error);
+      }
     },
     [reactFlowInstance, setNodes, onNodeAdd]
   );
@@ -148,9 +160,9 @@ export function WorkflowCanvas({ onNodeAdd }: WorkflowCanvasProps) {
           />
           <Background 
             variant={BackgroundVariant.Dots} 
-            gap={20} 
-            size={1}
-            color="#e5e7eb"
+            gap={24} 
+            size={1.5}
+            color="#d1d5db"
           />
         </ReactFlow>
       </div>
