@@ -1,74 +1,41 @@
-import { useState } from 'react';
 import { NODE_TEMPLATES, NodeTemplate } from '@/types/workflow';
 import * as Icons from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 
 interface NodeLibraryProps {
   onNodeSelect: (template: NodeTemplate) => void;
 }
 
 export function NodeLibrary({ onNodeSelect }: NodeLibraryProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  
-  const filteredTemplates = NODE_TEMPLATES.filter(node => 
-    node.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    node.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    node.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-  
-  const categories = Array.from(new Set(filteredTemplates.map(node => node.category)));
+  const categories = Array.from(new Set(NODE_TEMPLATES.map(node => node.category)));
   
   return (
-    <div className="w-80 bg-white border-l border-gray-200 h-full flex flex-col">
-      {/* Header */}
-      <div className="p-4 border-b border-gray-200">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-gray-900">Build</h2>
-          <button className="text-gray-400 hover:text-gray-600">
-            <Icons.X className="w-5 h-5" />
-          </button>
-        </div>
-        
-        {/* Search */}
-        <div className="relative mb-3">
-          <Icons.Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <Input
-            placeholder="Search..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 h-9 text-sm border-gray-200"
-          />
-        </div>
-        
-        {/* Copy from workflow */}
-        <Button variant="outline" size="sm" className="w-full justify-start text-sm font-normal">
-          <Icons.Copy className="w-4 h-4 mr-2" />
-          Copy from workflow
-        </Button>
+    <div className="w-80 bg-card border-l border-border h-full overflow-y-auto">
+      <div className="p-4 border-b border-border">
+        <h2 className="text-lg font-semibold">Control Library</h2>
+        <p className="text-sm text-muted-foreground mt-1">Drag nodes to build your workflow</p>
       </div>
       
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="p-4 space-y-6">
         {categories.map(category => {
-          const categoryNodes = filteredTemplates.filter(node => node.category === category);
-          
-          if (categoryNodes.length === 0) return null;
+          const categoryNodes = NODE_TEMPLATES.filter(node => node.category === category);
           
           return (
-            <div key={category} className="p-4">
-              <h3 className="text-sm font-medium text-gray-700 mb-3">
+            <div key={category}>
+              <h3 className="text-sm font-medium text-muted-foreground mb-3 uppercase tracking-wide">
                 {category}
               </h3>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {categoryNodes.map(template => {
                   const IconComponent = (Icons as any)[template.icon] || Icons.Zap;
                   
                   return (
                     <div
                       key={template.id}
-                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors group"
+                      className={cn(
+                        'p-3 rounded-lg border cursor-grab hover:shadow-md transition-all duration-200',
+                        'bg-white hover:bg-gray-50 border-gray-200'
+                      )}
                       draggable
                       onDragStart={(e) => {
                         e.dataTransfer.setData('application/reactflow', template.type);
@@ -77,12 +44,24 @@ export function NodeLibrary({ onNodeSelect }: NodeLibraryProps) {
                       }}
                       onClick={() => onNodeSelect(template)}
                     >
-                      <div className="w-8 h-8 rounded flex items-center justify-center bg-gray-100 group-hover:bg-gray-200 transition-colors">
-                        <IconComponent className="w-4 h-4 text-gray-600" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate">
-                          {template.name}
+                      <div className="flex items-start gap-3">
+                        <div className={cn(
+                          'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
+                          template.color === 'trigger' && 'bg-workflow-node-trigger text-workflow-node-trigger-foreground',
+                          template.color === 'action' && 'bg-workflow-node-action text-workflow-node-action-foreground',
+                          template.color === 'condition' && 'bg-workflow-node-condition text-workflow-node-condition-foreground',
+                          template.color === 'approved' && 'bg-workflow-node-approved text-workflow-node-approved-foreground',
+                          template.color === 'step' && 'bg-workflow-node-step text-workflow-node-step-foreground'
+                        )}>
+                          <IconComponent className="w-4 h-4" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium text-gray-900 mb-1">
+                            {template.name}
+                          </div>
+                          <div className="text-xs text-gray-500 leading-tight">
+                            {template.description}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -92,12 +71,6 @@ export function NodeLibrary({ onNodeSelect }: NodeLibraryProps) {
             </div>
           );
         })}
-        
-        {filteredTemplates.length === 0 && (
-          <div className="p-4 text-center text-gray-500 text-sm">
-            No items found matching "{searchQuery}"
-          </div>
-        )}
       </div>
     </div>
   );
