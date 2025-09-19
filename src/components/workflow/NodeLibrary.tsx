@@ -26,7 +26,7 @@ export function NodeLibrary({ onNodeSelect }: NodeLibraryProps) {
   
   return (
     <Card className="w-80 shadow-lg border-border bg-card">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 bg-white/80 backdrop-blur-sm">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-medium">Build</h2>
           <Button variant="ghost" size="sm">
