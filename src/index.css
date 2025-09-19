@@ -2,23 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* ServicePro Workflow Builder Design System
+All colors MUST be HSL for proper theming.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Base colors */
+    --background: 248 250 252;
     --foreground: 222.2 84% 4.9%;
 
+    /* Workflow canvas */
+    --canvas: 250 250 250;
+    --canvas-grid: 220 13% 91%;
+
+    /* Sidebar */
+    --sidebar-dark: 220 13% 9%;
+    --sidebar-dark-hover: 220 13% 15%;
+    --sidebar-icon: 220 9% 46%;
+    --sidebar-icon-active: 220 9% 85%;
+
+    /* Cards and surfaces */
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Workflow node colors */
+    --node-trigger: 271 81% 56%;       /* Purple for triggers */
+    --node-trigger-foreground: 0 0% 100%;
+    
+    --node-action: 336 84% 55%;        /* Pink/Red for actions */
+    --node-action-foreground: 0 0% 100%;
+    
+    --node-condition: 43 96% 56%;      /* Orange for conditions */
+    --node-condition-foreground: 220 13% 9%;
+    
+    --node-approved: 221 84% 55%;      /* Blue for approved/success */
+    --node-approved-foreground: 0 0% 100%;
+    
+    --node-step: 142 71% 45%;          /* Green for steps */
+    --node-step-foreground: 0 0% 100%;
+
+    /* Primary theme */
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -34,9 +63,9 @@ All colors MUST be HSL.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 271 81% 56%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -58,6 +87,9 @@ All colors MUST be HSL.
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
+    
+    --canvas: 217.2 32.6% 17.5%;
+    --canvas-grid: 217.2 32.6% 25%;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -65,8 +97,8 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 271 81% 56%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -82,7 +114,7 @@ All colors MUST be HSL.
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 271 81% 56%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +132,45 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Workflow-specific styles */
+@layer components {
+  .workflow-node {
+    @apply rounded-xl shadow-sm border-0 transition-all duration-200;
+    @apply hover:shadow-md hover:scale-105;
+    min-width: 140px;
+  }
+  
+  .workflow-node-trigger {
+    @apply bg-[hsl(var(--node-trigger))] text-[hsl(var(--node-trigger-foreground))];
+  }
+  
+  .workflow-node-action {
+    @apply bg-[hsl(var(--node-action))] text-[hsl(var(--node-action-foreground))];
+  }
+  
+  .workflow-node-condition {
+    @apply bg-[hsl(var(--node-condition))] text-[hsl(var(--node-condition-foreground))];
+  }
+  
+  .workflow-node-approved {
+    @apply bg-[hsl(var(--node-approved))] text-[hsl(var(--node-approved-foreground))];
+  }
+  
+  .workflow-node-step {
+    @apply bg-[hsl(var(--node-step))] text-[hsl(var(--node-step-foreground))];
+  }
+
+  .sidebar-dark {
+    @apply bg-[hsl(var(--sidebar-dark))] text-[hsl(var(--sidebar-icon))];
+  }
+  
+  .sidebar-icon {
+    @apply text-[hsl(var(--sidebar-icon))] hover:text-[hsl(var(--sidebar-icon-active))];
+    @apply hover:bg-[hsl(var(--sidebar-dark-hover))] transition-colors;
   }
 }
