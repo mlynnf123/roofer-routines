@@ -28,12 +28,14 @@ export function WorkflowBuilder() {
       />
       
       {/* Main Content */}
-      <div className="flex-1 flex">
+      <div className="flex-1 relative">
         {/* Canvas */}
         <WorkflowCanvas onNodeAdd={handleNodeAdd} />
         
-        {/* Right Panel - Node Library */}
-        <NodeLibrary onNodeSelect={handleNodeSelect} />
+        {/* Floating Node Library Panel */}
+        <div className="absolute top-4 right-4 z-10">
+          <NodeLibrary onNodeSelect={handleNodeSelect} />
+        </div>
       </div>
     </div>
   );
