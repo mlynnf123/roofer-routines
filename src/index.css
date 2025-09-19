@@ -146,23 +146,23 @@ All colors MUST be HSL for proper theming.
   }
   
   .workflow-node-trigger {
-    @apply bg-[hsl(var(--node-trigger))] text-[hsl(var(--node-trigger-foreground))];
+    @apply bg-stone-50 text-stone-800 border border-purple-200;
   }
   
   .workflow-node-action {
-    @apply bg-[hsl(var(--node-action))] text-[hsl(var(--node-action-foreground))];
+    @apply bg-stone-50 text-stone-800 border border-pink-200;
   }
   
   .workflow-node-condition {
-    @apply bg-[hsl(var(--node-condition))] text-[hsl(var(--node-condition-foreground))];
+    @apply bg-stone-50 text-stone-800 border border-orange-200;
   }
   
   .workflow-node-approved {
-    @apply bg-[hsl(var(--node-approved))] text-[hsl(var(--node-approved-foreground))];
+    @apply bg-stone-50 text-stone-800 border border-blue-200;
   }
   
   .workflow-node-step {
-    @apply bg-[hsl(var(--node-step))] text-[hsl(var(--node-step-foreground))];
+    @apply bg-stone-50 text-stone-800 border border-green-200;
   }
 
   .sidebar-dark {
