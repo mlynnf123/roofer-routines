@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { WorkflowSidebar } from './WorkflowSidebar';
 import { WorkflowCanvas } from './WorkflowCanvas';
 import { NodeLibrary } from './NodeLibrary';
 import { NodeTemplate } from '@/types/workflow';
 
 export function WorkflowBuilder() {
-  const [activeTab, setActiveTab] = useState('workflow');
   const [selectedNode, setSelectedNode] = useState<NodeTemplate | null>(null);
 
   const handleNodeSelect = (template: NodeTemplate) => {
@@ -21,12 +19,6 @@ export function WorkflowBuilder() {
 
   return (
     <div className="h-screen flex bg-background">
-      {/* Left Sidebar */}
-      <WorkflowSidebar 
-        activeTab={activeTab} 
-        onTabChange={setActiveTab} 
-      />
-      
       {/* Main Content */}
       <div className="flex-1 relative">
         {/* Canvas */}
