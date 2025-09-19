@@ -31,7 +31,7 @@ export function NodeLibrary({
             <Input placeholder="Search..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="pl-9 h-9 bg-slate-100 px-[57px]" />
           </div>
           
-          <Button variant="outline" size="sm" className="w-full justify-start text-slate-600 bg-slate-100">
+          <Button variant="outline" size="sm" className="w-full justify-start text-slate-600 bg-slate-100 text-sm font-light">
             <Icons.Copy className="w-4 h-4 mr-2" />
             Copy from workflow
           </Button>
