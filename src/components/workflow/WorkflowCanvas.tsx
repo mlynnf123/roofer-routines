@@ -145,7 +145,7 @@ export function WorkflowCanvas({ onNodeAdd }: WorkflowCanvasProps) {
           onDrop={onDrop}
           onDragOver={onDragOver}
           nodeTypes={nodeTypes}
-          fitView
+          defaultViewport={{ x: 0, y: 0, zoom: 0.5 }}
           style={{ backgroundColor: '#f9fafb' }}
         >
           <Controls 

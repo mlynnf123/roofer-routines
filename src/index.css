@@ -140,29 +140,30 @@ All colors MUST be HSL for proper theming.
 /* Workflow-specific styles */
 @layer components {
   .workflow-node {
-    @apply rounded-xl shadow-sm border-0 transition-all duration-200;
+    @apply rounded-lg shadow-sm border-0 transition-all duration-200 bg-white;
     @apply hover:shadow-md hover:scale-105;
-    min-width: 140px;
+    min-width: 120px;
+    padding: 8px 12px;
   }
   
   .workflow-node-trigger {
-    @apply bg-white text-stone-800 border border-purple-200;
+    @apply bg-white text-stone-800 border border-purple-200 shadow-sm;
   }
   
   .workflow-node-action {
-    @apply bg-white text-stone-800 border border-pink-200;
+    @apply bg-white text-stone-800 border border-pink-200 shadow-sm;
   }
   
   .workflow-node-condition {
-    @apply bg-white text-stone-800 border border-orange-200;
+    @apply bg-white text-stone-800 border border-orange-200 shadow-sm;
   }
   
   .workflow-node-approved {
-    @apply bg-white text-stone-800 border border-blue-200;
+    @apply bg-white text-stone-800 border border-blue-200 shadow-sm;
   }
   
   .workflow-node-step {
-    @apply bg-white text-stone-800 border border-green-200;
+    @apply bg-white text-stone-800 border border-green-200 shadow-sm;
   }
 
   .sidebar-dark {
