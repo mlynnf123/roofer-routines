@@ -70,7 +70,7 @@ export function NodeLibrary({ onNodeSelect }: NodeLibraryProps) {
                       return (
                         <div
                           key={template.id}
-                          className="flex items-center gap-3 p-2 rounded-md cursor-grab hover:bg-accent/50 transition-colors group"
+                          className="flex items-center gap-3 p-2 rounded-md cursor-grab bg-white hover:bg-gray-50 border border-gray-200 transition-colors group"
                           draggable
                           onDragStart={(e) => {
                             e.dataTransfer.setData('application/reactflow', template.type);
